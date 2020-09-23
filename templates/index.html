@@ -1,0 +1,50 @@
+{%extends 'base.html'%}
+
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+
+{% block body %}
+<div style="margin: 0 auto; width: 400px;">
+
+    <h1 style="text-align: center;">Task Master</h1>
+
+    <p style="text-align: center;">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. 
+        Dolore aut earum neque omnis ratione iste eaque harum provident, 
+        facere architecto, dicta expedita, est aspernatur id. 
+        Repellendus fugit dolore quam quae.
+    </p>
+
+    <form style="margin-top: 20px;" action="/" method="POST">
+        <input type="text" name="content" id="content">
+        <input type="submit" value="Add Task">
+    </form>
+
+    <br>
+
+    {% if tasks|length < 1 %}
+    <h4>There are no task. Create one below :)</h4>
+    {% else %}
+
+    <table style="border: 1px solid #aaa;">
+        <tr>
+            <th style="border: 1px solid #aaa;">Task</th>
+            <th style="border: 1px solid #aaa;">Added</th>
+            <th style="border: 1px solid #aaa;">Actions</th>
+        </tr>
+        {% for task in tasks  %}
+            <tr>
+                <td style="border: 1px solid #aaa;">{{task.content}}</td>
+                <td style="border: 1px solid #aaa;">{{task.date_created.date()}}</td>
+                <td>
+                    <a href="/delete/{{task.id}}">Delete</a>
+                    <br>
+                    <a href="/update/{{task.id}}">Update</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% endif %}
+</div>
+{% endblock %}
